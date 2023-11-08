@@ -1,16 +1,15 @@
-# Alafia Start
+# alafia-caddy
 
 ## Description
 
-This app is mostly hidden from the user. It contains essentially just two systemd service files that are required for other applications: binfmt which provides qemu-user shims to run amd64 / x86_64 docker containers, and caddy which runs a web server to serve web applications with a friendly name (e.g. http://<app>.alafia).
+Alafia-specific deployment of [caddy](https://caddyserver.com/) based on [a modified Docker image](https://github.com/lucaslorentz/caddy-docker-proxy). This app is mostly hidden from the user. It contains essentially just a systemd service file that is required for other applications. Caddy provides a server that maps alafia apps run in the browser to *.alafia domain names.
 
+## Usage
 
-## Installation Directories
+Meant to be used as a submodule in [alafia-apps](https://github.com/Alafia-Ai/alafia-apps).
 
-README.md - `/usr/share/doc/alafia-home/README.md`
-bin/alafia-home - `/usr/bin/alafia-home`
-alafia-home.desktop - `/usr/share/applications/alafia-home.desktop`
-alafia-home.png - `/usr/share/icons/alafia-home.png`
-alafia-home.service - `/etc/systemd/system/alafia-home.service`
-alafia-home/ - /opt/alafia-ai/apps/alafia-home/
+`Makefile` can be manually invoked with the following options:
 
+- `make` or `make build`: Locally build the Docker image
+- `make install`: Install the files in the `deploy/` directory, and if relevant, install systemd service files and modify `/etc/hosts/`
+- `make uninstall`: Removes all installed files, and if relevant, removes systemd services and resets `/etc/hosts/` 
